@@ -1,10 +1,28 @@
-async function main() {
+async function main() 
+{
 
     let response = await fetch('http://localhost:3001/listBooks')
     let books = await response.json()
 
     books.forEach(renderBook)
-}
+
+
+    let response1 = await fetch( 'http://localhost:3001/updateBook', 
+    {   
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "id" : 3,
+            "title": "Legends of Arathrae",
+            }),
+    });
+        let updateBook = await response1.json();
+        console.log(updateBook)
+
+    
+}   
 
 function renderBook(book) {
     let bookContainer = document.querySelector('.book-container')
