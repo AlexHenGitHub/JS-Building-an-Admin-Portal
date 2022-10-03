@@ -17,10 +17,25 @@ async function renderBooks() {
     list.innerHTML = newHTML;
     
 }
+
+async function assignedId() {
+    let newId = 0;
+    let response = await fetch('http://localhost:3001/listBooks');
+    let data = await response.json();
+    
+    data.forEach(book => {
+        if(book.id > newId)
+        {
+            newId = book.id;
+        }
+    })
+    return newId +1;
+}
     
 
 //Add a book 
 addButton.addEventListener('click', async () => {
+
 
     let id = await assignedId();
 
